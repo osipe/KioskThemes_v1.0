@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="$root_css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>$the_title - $company_name</title>
+
+	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+
+	$theme.include($top_head_include)
+</head>
+
+<body class="$css_class">
+
+<a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
+
+$theme.include($body_top_include)
+#if ($is_signed_in)
+	#dockbar()
+#end
+<div class="container-fluid" id="wrapper">
+	<header id="banner" role="banner">
+		<div id="heading">
+			<h1 class="site-title" style="margin: 0px 0 !important;">
+				<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
+					<img alt="KIOSK" src="/kiosk-theme/images/kiosk/banner.png" />
+				</a>
+				#if (!$is_signed_in)
+					<a class="a-login" data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow">
+						<span style="margin-left : 0px!important;" class="span-login">$sign_in_text</span>
+					</a>
+				#end
+		</div>
+	</header>
+	<div class="lfWrapper"> <div class="txt-description"> <font>Kiosk thông tin Phường</font> Hỗ trợ người dân thuận lợi trong việc tra cứu thông tin thủ tục hành chính, lệ phí hồ sơ, ...</div> </div>
+	<div class="rgWrapper"> 
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+	
+			$portletDisplay.setTitle($the_title)
+	
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+	</div>
+</div>
+
+$theme.include($body_bottom_include)
+
+$theme.include($bottom_include)
+
+</body>
+
+</html>
